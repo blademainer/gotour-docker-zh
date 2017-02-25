@@ -1,0 +1,13 @@
+FROM golang:1.6
+
+RUN go get -u github.com/Go-zh/tour/gotour
+RUN ls $GOPATH/bin
+
+ADD docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+RUN chmod +x $GOPATH/bin/gotour
+
+EXPOSE 3999
+WORKDIR $GOPATH
+
+CMD ["/docker-entrypoint.sh"]
